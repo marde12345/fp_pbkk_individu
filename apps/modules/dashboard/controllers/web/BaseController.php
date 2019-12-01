@@ -7,25 +7,29 @@ use Phalcon\Mvc\Controller;
 class BaseController extends Controller
 {
     public $controller;
+    public $allowed;
 
     public function initialize()
     {
         $this->controller = $this->router->getControllerName();
+        $this->allowed = (array) $this->config->controllerAllowed;
+
+        $this->authorized();
 
         $this->templateCss();
         $this->templateJs();
     }
 
-    public function indexAction()
-    {
-        $this->authorized();
-    }
-
     public function authorized()
     {
-        if (!$this->isLoggedIn()) {
-            return $this->response->redirect('dashboard/admin');
+        if (!$this->isLoggedIn() and !$this->isControllerAllowed()) {
+            return $this->response->redirect('login');
         }
+    }
+
+    public function isControllerAllowed()
+    {
+        return in_array($this->controller, $this->allowed) ? true : false;
     }
 
     public function isLoggedIn()
@@ -39,16 +43,20 @@ class BaseController extends Controller
 
     public function set_content($view)
     {
-        if (file_exists($this->view->getViewsDir() . $view . '.volt')) {
-            $this->view->pick($this->controller . '/template/index');
-            $this->view->content = $view;
+        $controller = $this->controller . '\\';
+        $viewDir = $this->view->getViewsDir();
+        $pathView = $viewDir . $controller;
+
+        if (file_exists($pathView . $view . '.volt')) {
+            $this->view->pick($controller . '/template/index');
+            $this->view->content = $controller . $view;
             return true;
-        } else { // Return 404
-            if ($this->controller == 'admin') {
-                $this->view->pick($this->controller . '/template/index');
-                return false;
-            }
-            $this->view->content = $this->controller . '/template/404';
+        } else {
+            $this->dispatcher->forward([
+                'module'        => 'dashboard',
+                'controller'    => 'showerror',
+                'action'        => 'viewnotfound',
+            ]);
             return false;
         }
     }
@@ -63,11 +71,6 @@ class BaseController extends Controller
                               });">
     
   </body>');
-    }
-
-    public function route404Action()
-    {
-        $this->view->pick('dashboard/template/404');
     }
 
     public function templateCss()

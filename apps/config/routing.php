@@ -21,11 +21,33 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
     $router->notFound(
         [
             'module' => 'dashboard',
-            'namespace' => 'Phalcon\Init\Common\Controllers',
-            'controller' => 'base',
-            'action'     => 'route404',
+            'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+            'controller' => 'showerror',
+            'action'     => 'show404',
         ]
     );
+
+    /**
+     * Manual Routing
+     */
+    $router->add('/login', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'dashboard',
+        'action' => 'login'
+    ));
+
+    $router->add('/register', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'dashboard',
+        'action' => 'register'
+    ));
+
+    /**
+     * End Of Manual Routing
+     */
+
 
     /**
      * Module Routing

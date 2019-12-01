@@ -8,7 +8,7 @@ return array(
         'className' => 'Phalcon\Init\Dashboard\Module',
         'path' => APP_PATH . '/modules/dashboard/Module.php',
         'defaultRouting' => true,
-        'defaultController' => 'base',
+        'defaultController' => 'dashboard',
         'defaultAction' => 'index'
     ],
 

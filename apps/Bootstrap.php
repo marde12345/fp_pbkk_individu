@@ -84,8 +84,8 @@ class Bootstrap extends Application
                             $dispatcher->forward(
                                 [
                                     'module'        => 'dashboard',
-                                    'controller'    => 'base',
-                                    'action'        => 'route404',
+                                    'controller'    => 'showerror',
+                                    'action'        => 'show404',
                                 ]
                             );
 
@@ -99,8 +99,8 @@ class Bootstrap extends Application
                                 $dispatcher->forward(
                                     [
                                         'module'        => 'dashboard',
-                                        'controller'    => 'base',
-                                        'action'        => 'route404',
+                                        'controller'    => 'showerror',
+                                        'action'        => 'show404',
                                     ]
                                 );
 

@@ -8,7 +8,7 @@ class AdminController extends BaseController
 {
     public function indexAction()
     {
-        $this->set_content('dashboard/index');
+        $this->set_content('index');
         $this->view->isi = 'Hello';
     }
 }
