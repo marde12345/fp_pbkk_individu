@@ -18,6 +18,9 @@ class DashboardController extends BaseController
 
     public function registerAction()
     {
+        $coba = new Users();
+        $coba->cobe();
+        exit;
         // Show register
         $this->set_content('register');
 
