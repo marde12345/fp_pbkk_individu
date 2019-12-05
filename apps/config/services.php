@@ -122,3 +122,5 @@ $di['db'] = function () use ($config) {
         "dbname" => $config->database->dbname
     ]);
 };
+
+session_start();

@@ -10,11 +10,11 @@
                 <div class="row">
                     <div class="col-md-12 col-12">
                         <label>Username</label>
-                        <input class="mb-0" type="username" name="username" placeholder="Username" required autofocus>
+                        <input type="username" name="username" placeholder="Username" required autofocus>
                     </div>
                     <div class="col-12">
                         <label>Password</label>
-                        <input class="mb-0" type="password" name="password" placeholder="Password" required>
+                        <input type="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="col-md-8">
                     </div>
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <button class="register-button mt-0" type="submit">Login</button>
+                        <button class="register-button" type="submit">Login</button>
                     </div>
 
                 </div>

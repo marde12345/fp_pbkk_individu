@@ -3,6 +3,7 @@
 namespace Phalcon\Init\Dashboard\Controllers\Web;
 
 use Phalcon\Mvc\Controller;
+use Phalcon\Session\Adapter\Files;
 
 class BaseController extends Controller
 {
@@ -35,10 +36,11 @@ class BaseController extends Controller
     public function isLoggedIn()
     {
         // Check if the variable is defined
-        if ($this->session->has('AUTH_NAME') and $this->session->has('AUTH_EMAIL') and $this->session->has('AUTH_CREATED') and $this->session->has('AUTH_UPDATED')) {
+        if ($this->session->has('auth')) {
             return true;
         }
         return false;
+        // return true;
     }
 
     public function set_content($view)
@@ -52,25 +54,13 @@ class BaseController extends Controller
             $this->view->content = $controller . $view;
             return true;
         } else {
-            $this->dispatcher->forward([
-                'module'        => 'dashboard',
-                'controller'    => 'showerror',
-                'action'        => 'viewnotfound',
-            ]);
-            return false;
+            return $this->response->redirect('viewnotfound');;
         }
     }
 
     public function set_pnotify($title, $string, $type)
     {
-        $this->session->set_flashdata('pnotify', '<body onload="new PNotify({
-                                  title: \'' . $title . '\',
-                                  text: \'' . $string . '\',
-                                  type: \'' . $type . '\',
-                                  styling: \'bootstrap3\'
-                              });">
-    
-  </body>');
+        $this->view->pnotify = '<body onload="new PNotify({title: \'' . $title . '\',text: \'' . $string . '\',type: \'' . $type . '\',styling: \'bootstrap3\'});"></body>';
     }
 
     public function templateCss()
@@ -119,5 +109,11 @@ class BaseController extends Controller
         $this->assets->collection('dashboardJs')
             ->addJs('assets/' . $this->controller . '/js/vendors.js', true)
             ->addJs('assets/' . $this->controller . '/js/active.js', true);
+    }
+
+    public function checkSession()
+    {
+        print_r($_SESSION);
+        die;
     }
 }

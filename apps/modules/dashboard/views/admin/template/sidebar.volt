@@ -25,25 +25,25 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Pelanggan
+        Penjual
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{url('admin/selleradd')}}">
             <i class="fas fa-fw fa-user-plus"></i>
-            <span>Tambah Pelanggan</span></a>
+            <span>Tambah Penjual</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{url('admin/sellershow')}}">
             <i class="fas fa-fw fa-users"></i>
-            <span>Lihat Pelanggan</span></a>
+            <span>Lihat Penjual</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{url('admin/sellerdel')}}">
             <i class="fas fa-fw fa-trash"></i>
-            <span>Hapus Pelanggan</span></a>
+            <span>Hapus Penjual</span></a>
     </li>
 
     <!-- Divider -->
@@ -51,13 +51,39 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Pulsa
+        Pembeli
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('admin/buyeradd')}}">
+            <i class="fas fa-fw fa-user-plus"></i>
+            <span>Tambah Pembeli</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('admin/buyershow')}}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Lihat Pembeli</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('admin/buyerdel')}}">
+            <i class="fas fa-fw fa-trash"></i>
+            <span>Hapus Pembeli</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Produk
     </div>
 
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fas fa-fw fa-plus"></i>
-            <span>Tambah Pulsa</span></a>
+            <span>Kategori</span></a>
     </li>
 
     <!-- Divider -->

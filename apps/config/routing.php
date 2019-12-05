@@ -20,12 +20,19 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
      */
     $router->notFound(
         [
-            'module' => 'dashboard',
-            'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+            'module' => 'backoffice',
+            'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
             'controller' => 'showerror',
             'action'     => 'show404',
         ]
     );
+
+    $router->add('/viewnotfound', array(
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
+        'controller' => 'showerror',
+        'action' => 'viewnotfound'
+    ));
 
     /**
      * Manual Routing
@@ -37,9 +44,16 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'action' => 'login'
     ));
 
+    $router->add('/logout', array(
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
+        'controller' => 'login',
+        'action' => 'logout'
+    ));
+
     $router->addPost('/login', array(
-        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
-        'module' => 'dashboard',
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
         'controller' => 'login',
         'action' => 'login'
     ));
@@ -50,6 +64,75 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'controller' => 'dashboard',
         'action' => 'register'
     ));
+
+    $router->addPost('/register', array(
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
+        'controller' => 'login',
+        'action' => 'register'
+    ));
+
+    $router->add('/admin/sellershow', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'sellershow'
+    ));
+    $router->add('/admin/selleradd', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'selleradd'
+    ));
+    $router->add('/admin/sellerdel', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'sellerdel'
+    ));
+    $router->addPost('/admin/selleradd', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'addseller'
+    ));
+    $router->addPost('/admin/sellerdel', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'delseller'
+    ));
+    $router->add('/admin/buyershow', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'buyershow'
+    ));
+    $router->add('/admin/buyeradd', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'buyeradd'
+    ));
+    $router->add('/admin/buyerdel', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'buyerdel'
+    ));
+    $router->addPost('/admin/buyeradd', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'addbuyer'
+    ));
+    $router->addPost('/admin/buyerdel', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'delbuyer'
+    ));
+
 
     /**
      * End Of Manual Routing
