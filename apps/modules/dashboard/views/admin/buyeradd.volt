@@ -6,16 +6,16 @@
         <form action="{{url('admin/buyeradd')}}" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label>Nama Pembeli</label>
-                    <input type="text" name="name" class="form-control" placeholder="Nama Pembeli" autofocus>
+                    <label>Nama Penjual</label>
+                    {{form.render('name')}}
                 </div>
                 <div class="form-group col-md-12">
                     <label>Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username">
+                    {{form.render('username')}}
                 </div>
                 <div class="form-group col-md-12">
                     <label>Alamat Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Alamat Email">
+                    {{form.render('email')}}
                 </div>
             </div>
 

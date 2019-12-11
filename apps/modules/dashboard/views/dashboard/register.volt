@@ -10,23 +10,28 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label>Username</label>
-                        <input type="text" name="username" placeholder="Username">
+                        {{form.render('username')}}
+                        <!-- <input type="text" name="username" placeholder="Username"> -->
                     </div>
                     <div class="col-md-12">
                         <label>Name</label>
-                        <input type="text" name="name" placeholder="Name">
+                        {{form.render('name')}}
+                        <!-- <input type="text" name="name" placeholder="Name"> -->
                     </div>
                     <div class="col-md-12">
                         <label>Email Address</label>
-                        <input type="email" name="email" placeholder="Email Address">
+                        {{form.render('email')}}
+                        <!-- <input type="email" name="email" placeholder="Email Address"> -->
                     </div>
                     <div class="col-md-6">
                         <label>Password</label>
-                        <input type="password" name="password" placeholder="Password">
+                        {{form.render('password')}}
+                        <!-- <input type="password" name="password" placeholder="Password"> -->
                     </div>
                     <div class="col-md-6">
                         <label>Confirm Password</label>
-                        <input type="password" name="confirm_password" placeholder="Confirm Password">
+                        {{form.render('password_confirm')}}
+                        <!-- <input type="password" name="confirm_password" placeholder="Confirm Password"> -->
                     </div>
                     <div class="col-md-6">
                         <button class="register-button" type="submit">Register</button>

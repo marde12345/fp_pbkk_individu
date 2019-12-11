@@ -10,7 +10,7 @@
                     required autofocus="">
                     <option value="">Pilih Pembeli</option>
                     {%for buyer in data%}
-                    <option value='{{buyer.ID_USER}}'>{{buyer.NAME}} - {{buyer.USERNAME}}</option>
+                    <option value='{{buyer.id_user}}'>{{buyer.name}} - {{buyer.username}}</option>
                     {%endfor%}
                 </select>
             </div>

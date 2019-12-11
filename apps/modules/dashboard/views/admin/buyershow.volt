@@ -26,10 +26,10 @@
                     {%for buyer in data%}
                     <tr>
                         <td>1</td>
-                        <td>{{buyer.ID_USER}}</td>
-                        <td>{{buyer.NAME}}</td>
-                        <td>{{buyer.EMAIL}}</td>
-                        <td>{{buyer.USERNAME}}</td>
+                        <td>{{buyer.id_user}}</td>
+                        <td>{{buyer.name}}</td>
+                        <td>{{buyer.email}}</td>
+                        <td>{{buyer.username}}</td>
                     </tr>
                     {%endfor%}
                 </tbody>

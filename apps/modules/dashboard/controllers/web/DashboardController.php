@@ -2,6 +2,7 @@
 
 namespace Phalcon\Init\Dashboard\Controllers\Web;
 
+use App\Forms\RegisterUser;
 use Phalcon\Init\Dashboard\Models\Users;
 
 class DashboardController extends BaseController
@@ -23,6 +24,7 @@ class DashboardController extends BaseController
     {
         // Show register
         $this->set_content('register');
+        $this->view->form = new RegisterUser();
     }
 
     public function loginRedirect()

@@ -114,6 +114,9 @@ class BaseController extends Controller
             ->setTargetUri("css/theme.css")
             ->addCss('assets/' . $this->controller . '/css/vendors.css', true)
             ->addCss('assets/' . $this->controller . '/css/style.css', true)
+            ->addCss('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.css', true)
+            ->addCss('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.buttons.css', true)
+            ->addCss('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.nonblock.css', true)
             ->join(true);
     }
 
@@ -136,7 +139,10 @@ class BaseController extends Controller
 
         $this->assets->collection('dashboardJs')
             ->addJs('assets/' . $this->controller . '/js/vendors.js', true)
-            ->addJs('assets/' . $this->controller . '/js/active.js', true);
+            ->addJs('assets/' . $this->controller . '/js/active.js', true)
+            ->addJs('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.js', true)
+            ->addJs('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.buttons.js', true)
+            ->addJs('assets/' . $this->controller . '/vendor/pnotify/dist/pnotify.nonblock.js', true);
     }
 
     public function checkSession()

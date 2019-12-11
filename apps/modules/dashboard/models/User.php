@@ -20,12 +20,12 @@ class User extends Model
 
     public function initialize()
     {
-        $this->setSource('users');
+        $this->setSource('user');
     }
 
     public function getSource()
     {
-        return 'users';
+        return 'user';
     }
 
     public function getPassword()

@@ -121,6 +121,8 @@ class AdminController extends BaseController
 
     public function buyerAddAction()
     {
+        $form = new RegisterSellerAdminForm();
+        $this->view->form = $form;
         $this->set_content('buyeradd');
     }
 
@@ -128,31 +130,32 @@ class AdminController extends BaseController
     {
         if ($this->request->getPost()) {
             // Save action
-            $user = new Users();
-            $user->USERNAME = $this->request->getPost('username');
-            $user->PASSWORD = $this->security->hash('123');
-            $user->NAME = $this->request->getPost('name');
-            $user->EMAIL = $this->request->getPost('email');
-            $user->ROLE = 'user';
-            $user->LAST_LOGIN = date("d-m-Y H:i:s");
+            $user = new Sellers();
+            $form = new RegisterSellerAdminForm();
+            $form->bind($_POST, $user);
 
-            if ($user->save() === false) {
+            $user->password = $this->security->hash('123');
+            $user->role = 'user';
+            $user->last_login = date("d-m-Y H:i:s");
+
+            if (!$form->isValid($_POST, $user)) {
+                $messages = $form->getMessages();
+
+                foreach ($messages as $message) {
+                    $this->flashSession->error($message);
+                }
+            } elseif ($user->save() === false) {
                 $messages = $user->getMessages();
 
                 foreach ($messages as $message) {
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('Tambah Pembeli', 'Berhasil menambahkan ' . $user->NAME . 'kedalam aplikasi', 'success');
+                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->NAME . ' kedalam aplikasi');
                 return $this->response->redirect('admin/buyershow');
-                // return $this->dispatcher->forward([
-                //     'action' => 'buyershow',
-                // ]);
             }
-            $this->set_pnotify('Ada yang aneh', 'Coba hubungi admin', 'error');
-            return $this->dispatcher->forward([
-                'action' => 'buyeradd',
-            ]);
+            $this->set_pnotify('error', 'Coba hubungi admin');
+            return $this->response->redirect('admin/buyeradd');
         }
     }
 
@@ -162,7 +165,7 @@ class AdminController extends BaseController
             // Delete action
             $id_user = $this->request->getPost('id_user');
             $user = Users::find([
-                'conditions' => 'ID_USER = ?1',
+                'conditions' => 'id_user = ?1',
                 'bind'       => [
                     1 => $id_user
                 ]
@@ -175,15 +178,11 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('Hapus Pembeli', 'Berhasil Menghapus ' . $user->NAME, 'error');
-                return $this->dispatcher->forward([
-                    'action' => 'buyershow',
-                ]);
+                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->NAME);
+                return $this->response->redirect('admin/buyershow');
             }
-            $this->set_pnotify('Ada yang aneh', 'Coba hubungi admin', 'error');
-            return $this->dispatcher->forward([
-                'action' => 'buyershow',
-            ]);
+            $this->set_pnotify('error', 'Coba hubungi admin');
+            return $this->response->redirect('admin/buyershow');
         }
     }
 

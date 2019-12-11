@@ -21,6 +21,27 @@
 
 <body>
 
+    {% if flashSession.has('notice')==true OR flashSession.has('success') %}
+    {% for notif in flashSession.getMessages('success') %}
+
+    <body onload="new PNotify({title: 'Sukses',text: '{{notif}}',type: 'success',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% for notif in flashSession.getMessages('notice') %}
+
+    <body onload="new PNotify({title: 'Perhatian',text: '{{notif}}',type: 'info',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% endif %}
+    {% if flashSession.has('warning')==true OR flashSession.has('error') %}
+    {% for notif in flashSession.getMessages('warning') %}
+
+    <body onload="new PNotify({title: 'Peringatan!!!',text: '{{notif}}',type: 'notice',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% for notif in flashSession.getMessages('error') %}
+
+    <body onload="new PNotify({title: 'Waduh...',text: '{{notif}}',type: 'error',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% endif %}
+
     <!--====================  Header area ====================-->
 
     <div class="header-area header-sticky">
@@ -47,10 +68,10 @@
 
     <!-- <div class="page-section pb-40">
         <div class="container"> -->
-            {% if content is defined %}
-            {{ partial(content) }}
-            {% endif %}
-        <!-- </div>
+    {% if content is defined %}
+    {{ partial(content) }}
+    {% endif %}
+    <!-- </div>
     </div> -->
 
     <!--====================  End of page content  ====================-->
