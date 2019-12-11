@@ -21,46 +21,6 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Pelanggan
-    </div>
-
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-user-plus"></i>
-            <span>Tambah Pelanggan</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Lihat Pelanggan</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-trash"></i>
-            <span>Hapus Pelanggan</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Pulsa
-    </div>
-
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-plus"></i>
-            <span>Tambah Pulsa</span></a>
-    </li>
-
-    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->

@@ -11,8 +11,19 @@
 </head>
 
 <body>
-    {% if pnotify is defined %}
-    {{pnotify}}
+    {{flashSession}}
+    {% if flashSession.has('notice')==true OR flashSession.has('success') %}
+    {% for notif in flashSession.getMessages('success') %}
+
+    <body onload="new PNotify({title: 'Success',text: '{{notif}}',type: 'success',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% for notif in flashSession.getMessages('notice') %}
+    <div class="notif_global success">
+        <div class="notif_global-title">Сообщение</div>
+        <div class="notif_global-content">{{ notif }}</div>
+        <div class="notif_global-close ico_close"></div>
+    </div>
+    {% endfor %}
     {% endif %}
 
 

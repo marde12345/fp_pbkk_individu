@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>PBKK</title>
+    <title>USER</title>
 
     {{ assets.outputCss('admin') }}
 </head>
@@ -24,14 +24,14 @@
     </a>
     <div id="wrapper">
 
-        {{ partial('admin/template/sidebar') }}
+        {{ partial('user/template/sidebar') }}
 
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
                 <div class="container-fluid">
-                    {{ partial('admin/template/topbar') }}
+                    {{ partial('user/template/topbar') }}
                     {% if content is defined %}
                     {{ partial(content) }}
                     {% endif %}

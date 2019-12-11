@@ -2,6 +2,7 @@
     "name": "phalcon",
     "description": "untuk PBKK",
     "require": {
-        "vlucas/phpdotenv": "^3.3"
+        "vlucas/phpdotenv": "^3.3",
+        "swiftmailer/swiftmailer": "^6.0"
     }
 }

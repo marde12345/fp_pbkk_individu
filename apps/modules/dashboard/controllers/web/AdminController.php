@@ -142,9 +142,10 @@ class AdminController extends BaseController
                 }
             } else {
                 $this->set_pnotify('Tambah Pembeli', 'Berhasil menambahkan ' . $user->NAME . 'kedalam aplikasi', 'success');
-                return $this->dispatcher->forward([
-                    'action' => 'buyershow',
-                ]);
+                return $this->response->redirect('admin/buyershow');
+                // return $this->dispatcher->forward([
+                //     'action' => 'buyershow',
+                // ]);
             }
             $this->set_pnotify('Ada yang aneh', 'Coba hubungi admin', 'error');
             return $this->dispatcher->forward([

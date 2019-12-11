@@ -15,7 +15,7 @@ class BaseController extends Controller
         $this->controller = $this->router->getControllerName();
         $this->allowed = (array) $this->config->controllerAllowed;
 
-        $this->authorized();
+        // $this->authorized();
 
         $this->templateCss();
         $this->templateJs();
@@ -60,7 +60,8 @@ class BaseController extends Controller
 
     public function set_pnotify($title, $string, $type)
     {
-        $this->view->pnotify = '<body onload="new PNotify({title: \'' . $title . '\',text: \'' . $string . '\',type: \'' . $type . '\',styling: \'bootstrap3\'});"></body>';
+        $this->flashSession->setImplicitFlush(false)->success('Berhasil');
+        // $this->view->pnotify = '<body onload="new PNotify({title: \'' . $title . '\',text: \'' . $string . '\',type: \'' . $type . '\',styling: \'bootstrap3\'});"></body>';
     }
 
     public function templateCss()

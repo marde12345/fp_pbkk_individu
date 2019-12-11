@@ -11,8 +11,19 @@
 </head>
 
 <body>
-    <?php if (isset($pnotify)) { ?>
-    <?= $pnotify ?>
+    <?= $flashSession ?>
+    <?php if ($this->flashSession->has('notice') == true || $this->flashSession->has('success')) { ?>
+    <?php foreach ($this->flashSession->getMessages('success') as $notif) { ?>
+
+    <body onload="new PNotify({title: 'Success',text: '<?= $notif ?>',type: 'success',styling: 'bootstrap3'});"></body>
+    <?php } ?>
+    <?php foreach ($this->flashSession->getMessages('notice') as $notif) { ?>
+    <div class="notif_global success">
+        <div class="notif_global-title">Сообщение</div>
+        <div class="notif_global-content"><?= $notif ?></div>
+        <div class="notif_global-close ico_close"></div>
+    </div>
+    <?php } ?>
     <?php } ?>
 
 
