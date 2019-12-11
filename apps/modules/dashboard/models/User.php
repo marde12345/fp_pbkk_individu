@@ -17,6 +17,11 @@ class User extends Model
     public $email;
     public $role;
     public $last_login;
+    public $phone;
+    public $address;
+    public $photo;
+    public $verifcode;
+    public $userstatus;
 
     public function initialize()
     {

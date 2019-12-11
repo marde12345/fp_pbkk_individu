@@ -27,6 +27,11 @@ return new Config(
 
         'controllerAllowed' => [
             'dashboard',
-        ]
+        ],
+
+        'smtp' => [
+            'username' => getenv('SMTP_USERNAME'),
+            'password' => getenv('SMTP_PASSWORD'),
+        ],
     ]
 );

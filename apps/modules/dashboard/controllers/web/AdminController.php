@@ -137,6 +137,8 @@ class AdminController extends BaseController
             $user->password = $this->security->hash('123');
             $user->role = 'user';
             $user->last_login = date("d-m-Y H:i:s");
+            $user->verifcode = $this->security->hash($user->getName());
+            $user->userstatus = 0;
 
             if (!$form->isValid($_POST, $user)) {
                 $messages = $form->getMessages();

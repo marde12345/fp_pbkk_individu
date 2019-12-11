@@ -27,9 +27,13 @@ class LoginController extends Controller
 
             if ($user) {
                 if ($this->security->checkHash($password, $user->getPassword())) {
-                    $this->sessionBuilder($user);
+                    if ($user->userstatus == 1) {
+                        $this->sessionBuilder($user);
 
-                    return $this->response->redirect('dashboard/' . $user->getRole());
+                        return $this->response->redirect('dashboard/' . $user->getRole());
+                    } else {
+                        $this->flashSession->error('Anda belum melakukan verifikasi');
+                    }
                 } else {
                     $this->flashSession->error('Password salah');
                 }

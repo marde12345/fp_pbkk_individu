@@ -17,6 +17,11 @@ class Users extends Model
     public $email;
     public $role;
     public $last_login;
+    public $phone;
+    public $address;
+    public $photo;
+    public $verifcode;
+    public $userstatus;
 
     public function initialize()
     {
@@ -51,5 +56,10 @@ class Users extends Model
     public function getRole()
     {
         return $this->role;
+    }
+
+    public function setUserstatus($status)
+    {
+        $this->userstatus = $status;
     }
 }

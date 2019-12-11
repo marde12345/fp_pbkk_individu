@@ -6,7 +6,7 @@
         <form action="{{url('admin/buyeradd')}}" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-md-12">
-                    <label>Nama Penjual</label>
+                    <label>Nama User</label>
                     {{form.render('name')}}
                 </div>
                 <div class="form-group col-md-12">

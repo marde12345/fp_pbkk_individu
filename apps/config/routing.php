@@ -33,6 +33,19 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'controller' => 'showerror',
         'action' => 'viewnotfound'
     ));
+    $router->add('/sendmail/:params', [
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
+        'controller' => 'backoffice',
+        'action' => 'sendVCAcc',
+        'params' => 1
+    ]);
+    $router->add('/getmail', [
+        'namespace' => 'Phalcon\Init\BackOffice\Controllers\Web',
+        'module' => 'backoffice',
+        'controller' => 'backoffice',
+        'action' => 'getVCAcc'
+    ]);
 
     /**
      * Manual Routing

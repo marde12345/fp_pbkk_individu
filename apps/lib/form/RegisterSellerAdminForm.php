@@ -26,7 +26,7 @@ class RegisterSellerAdminForm extends Form
         $name = new Text('name', [
             "class" => "form-control",
             // "required" => true,
-            "placeholder" => "Nama Penjual"
+            "placeholder" => "Nama"
         ]);
 
         // form name field validation
