@@ -13,7 +13,7 @@ class Users extends User
     public function get()
     {
         $user = Users::find([
-            'conditions' => 'ROLE = ?1',
+            'conditions' => 'role = ?1',
             'bind'       => [
                 1 => 'user'
             ]

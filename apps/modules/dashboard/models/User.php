@@ -10,13 +10,13 @@ use Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class User extends Model
 {
-    public $ID_USER;
-    public $USERNAME;
-    public $PASSWORD;
-    public $NAME;
-    public $EMAIL;
-    public $ROLE;
-    public $LAST_LOGIN;
+    public $id_user;
+    public $username;
+    public $password;
+    public $name;
+    public $email;
+    public $role;
+    public $last_login;
 
     public function initialize()
     {
@@ -30,26 +30,26 @@ class User extends Model
 
     public function getPassword()
     {
-        return $this->PASSWORD;
+        return $this->password;
     }
     public function getUsername()
     {
-        return $this->USERNAME;
+        return $this->username;
     }
     public function getId()
     {
-        return $this->ID_USER;
+        return $this->id_user;
     }
     public function getEmail()
     {
-        return $this->EMAIL;
+        return $this->email;
     }
     public function getName()
     {
-        return $this->NAME;
+        return $this->name;
     }
     public function getRole()
     {
-        return $this->ROLE;
+        return $this->role;
     }
 }

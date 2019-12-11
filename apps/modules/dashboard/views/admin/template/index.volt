@@ -11,18 +11,24 @@
 </head>
 
 <body>
-    {{flashSession}}
     {% if flashSession.has('notice')==true OR flashSession.has('success') %}
     {% for notif in flashSession.getMessages('success') %}
 
-    <body onload="new PNotify({title: 'Success',text: '{{notif}}',type: 'success',styling: 'bootstrap3'});"></body>
+    <body onload="new PNotify({title: 'Sukses',text: '{{notif}}',type: 'success',styling: 'bootstrap3'});"></body>
     {% endfor %}
     {% for notif in flashSession.getMessages('notice') %}
-    <div class="notif_global success">
-        <div class="notif_global-title">Сообщение</div>
-        <div class="notif_global-content">{{ notif }}</div>
-        <div class="notif_global-close ico_close"></div>
-    </div>
+
+    <body onload="new PNotify({title: 'Perhatian',text: '{{notif}}',type: 'info',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% endif %}
+    {% if flashSession.has('warning')==true OR flashSession.has('error') %}
+    {% for notif in flashSession.getMessages('warning') %}
+
+    <body onload="new PNotify({title: 'Peringatan!!!',text: '{{notif}}',type: 'notice',styling: 'bootstrap3'});"></body>
+    {% endfor %}
+    {% for notif in flashSession.getMessages('error') %}
+
+    <body onload="new PNotify({title: 'Waduh...',text: '{{notif}}',type: 'error',styling: 'bootstrap3'});"></body>
     {% endfor %}
     {% endif %}
 

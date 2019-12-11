@@ -5,6 +5,8 @@ namespace Phalcon\Init\Dashboard\Controllers\Web;
 use Phalcon\Init\Dashboard\Models\Sellers;
 use Phalcon\Init\Dashboard\Models\Users;
 use Phalcon\Mvc\View;
+use App\Forms;
+use App\Forms\RegisterSellerAdminForm;
 
 class AdminController extends BaseController
 {
@@ -34,7 +36,9 @@ class AdminController extends BaseController
 
     public function sellerAddAction()
     {
+        $form = new RegisterSellerAdminForm();
         $this->set_content('selleradd');
+        $this->view->form = $form;
     }
 
     public function addSellerAction()
@@ -42,29 +46,31 @@ class AdminController extends BaseController
         if ($this->request->getPost()) {
             // Save action
             $user = new Sellers();
-            $user->USERNAME = $this->request->getPost('username');
-            $user->PASSWORD = $this->security->hash('123');
-            $user->NAME = $this->request->getPost('name');
-            $user->EMAIL = $this->request->getPost('email');
-            $user->ROLE = 'seller';
-            $user->LAST_LOGIN = date("d-m-Y H:i:s");
+            $form = new RegisterSellerAdminForm();
+            $form->bind($_POST, $user);
 
-            if ($user->save() === false) {
+            $user->password = $this->security->hash('123');
+            $user->role = 'seller';
+            $user->last_login = date("d-m-Y H:i:s");
+
+            if (!$form->isValid($_POST, $user)) {
+                $messages = $form->getMessages();
+
+                foreach ($messages as $message) {
+                    $this->flashSession->error($message);
+                }
+            } elseif ($user->save() === false) {
                 $messages = $user->getMessages();
 
                 foreach ($messages as $message) {
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('Tambah Penjual', 'Berhasil menambahkan ' . $user->NAME . 'kedalam aplikasi', 'success');
-                return $this->dispatcher->forward([
-                    'action' => 'sellershow',
-                ]);
+                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->NAME . ' kedalam aplikasi');
+                return $this->response->redirect('/admin/sellershow');
             }
-            $this->set_pnotify('Ada yang aneh', 'Coba hubungi admin', 'error');
-            return $this->dispatcher->forward([
-                'action' => 'selleradd',
-            ]);
+            $this->set_pnotify('error', 'Ada yang aneh, coba hubungi admin');
+            return $this->response->redirect('/admin/selleradd');
         }
     }
 
@@ -74,7 +80,7 @@ class AdminController extends BaseController
             // Delete action
             $id_user = $this->request->getPost('id_user');
             $user = Users::find([
-                'conditions' => 'ID_USER = ?1',
+                'conditions' => 'id_user = ?1',
                 'bind'       => [
                     1 => $id_user
                 ]
@@ -87,15 +93,11 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('Hapus Penjual', 'Berhasil Menghapus ' . $user->NAME, 'error');
-                return $this->dispatcher->forward([
-                    'action' => 'sellershow',
-                ]);
+                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->NAME);
+                return $this->response->redirect('/admin/sellershow');
             }
-            $this->set_pnotify('Ada yang aneh', 'Coba hubungi admin', 'error');
-            return $this->dispatcher->forward([
-                'action' => 'sellershow',
-            ]);
+            $this->set_pnotify('error', 'Coba hubungi admin');
+            return $this->response->redirect('/admin/sellershow');
         }
     }
 

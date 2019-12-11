@@ -11,18 +11,24 @@
 </head>
 
 <body>
-    <?= $flashSession ?>
     <?php if ($this->flashSession->has('notice') == true || $this->flashSession->has('success')) { ?>
     <?php foreach ($this->flashSession->getMessages('success') as $notif) { ?>
 
-    <body onload="new PNotify({title: 'Success',text: '<?= $notif ?>',type: 'success',styling: 'bootstrap3'});"></body>
+    <body onload="new PNotify({title: 'Sukses',text: '<?= $notif ?>',type: 'success',styling: 'bootstrap3'});"></body>
     <?php } ?>
     <?php foreach ($this->flashSession->getMessages('notice') as $notif) { ?>
-    <div class="notif_global success">
-        <div class="notif_global-title">Сообщение</div>
-        <div class="notif_global-content"><?= $notif ?></div>
-        <div class="notif_global-close ico_close"></div>
-    </div>
+
+    <body onload="new PNotify({title: 'Perhatian',text: '<?= $notif ?>',type: 'info',styling: 'bootstrap3'});"></body>
+    <?php } ?>
+    <?php } ?>
+    <?php if ($this->flashSession->has('warning') == true || $this->flashSession->has('error')) { ?>
+    <?php foreach ($this->flashSession->getMessages('warning') as $notif) { ?>
+
+    <body onload="new PNotify({title: 'Peringatan!!!',text: '<?= $notif ?>',type: 'notice',styling: 'bootstrap3'});"></body>
+    <?php } ?>
+    <?php foreach ($this->flashSession->getMessages('error') as $notif) { ?>
+
+    <body onload="new PNotify({title: 'Waduh...',text: '<?= $notif ?>',type: 'error',styling: 'bootstrap3'});"></body>
     <?php } ?>
     <?php } ?>
 

@@ -13,7 +13,7 @@ class Sellers extends User
     public function get()
     {
         $seller = Users::find([
-            'conditions' => 'ROLE = ?1',
+            'conditions' => 'role = ?1',
             'bind'       => [
                 1 => 'seller'
             ]

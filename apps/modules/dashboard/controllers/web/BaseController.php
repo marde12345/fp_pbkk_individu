@@ -15,7 +15,7 @@ class BaseController extends Controller
         $this->controller = $this->router->getControllerName();
         $this->allowed = (array) $this->config->controllerAllowed;
 
-        // $this->authorized();
+        $this->authorized();
 
         $this->templateCss();
         $this->templateJs();
@@ -23,14 +23,25 @@ class BaseController extends Controller
 
     public function authorized()
     {
-        if (!$this->isLoggedIn() and !$this->isControllerAllowed()) {
+        if ($this->isControllerAllowed()) {
+            return true;
+        }
+        if (!$this->isLoggedIn()) {
             return $this->response->redirect('login');
+        }
+        if (!$this->isSessionController()) {
+            return $this->response->redirect('dashboard/' . $_SESSION['auth']['role']);
         }
     }
 
     public function isControllerAllowed()
     {
         return in_array($this->controller, $this->allowed) ? true : false;
+    }
+
+    public function isSessionController()
+    {
+        return ($this->router->getControllerName() == $_SESSION['auth']['role']) ? true : false;
     }
 
     public function isLoggedIn()
@@ -58,9 +69,25 @@ class BaseController extends Controller
         }
     }
 
-    public function set_pnotify($title, $string, $type)
+    public function set_pnotify($type, $string)
     {
-        $this->flashSession->setImplicitFlush(false)->success('Berhasil');
+        switch ($type) {
+            case 'success':
+                $this->flashSession->setImplicitFlush(false)->success($string);
+                break;
+            case 'error':
+                $this->flashSession->setImplicitFlush(false)->error($string);
+                break;
+            case 'notice':
+                $this->flashSession->setImplicitFlush(false)->notice($string);
+                break;
+            case 'warning':
+                $this->flashSession->setImplicitFlush(false)->warning($string);
+                break;
+            default:
+                # code...
+                break;
+        }
         // $this->view->pnotify = '<body onload="new PNotify({title: \'' . $title . '\',text: \'' . $string . '\',type: \'' . $type . '\',styling: \'bootstrap3\'});"></body>';
     }
 

@@ -7,11 +7,12 @@ $loader = new \Phalcon\Loader();
  */
 $loader->registerNamespaces(array(
     /**
- * Load SQL server db adapter namespace
- */
+     * Load SQL server db adapter namespace
+     */
     //'Phalcon\Db\Adapter\Pdo' => APP_PATH . '/lib/Phalcon/Db/Adapter/Pdo',
     //'Phalcon\Db\Dialect' => APP_PATH . '/lib/Phalcon/Db/Dialect',
     //'Phalcon\Db\Result' => APP_PATH . '/lib/Phalcon/Db/Result',
+    'App\Forms' => APP_PATH . '/lib/form',
 
 ));
 

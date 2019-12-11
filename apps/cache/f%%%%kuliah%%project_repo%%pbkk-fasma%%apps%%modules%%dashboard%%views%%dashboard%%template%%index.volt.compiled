@@ -45,13 +45,13 @@
 
     <!--==================== page content ====================-->
 
-    <div class="page-section pb-40">
-        <div class="container">
+    <!-- <div class="page-section pb-40">
+        <div class="container"> -->
             <?php if (isset($content)) { ?>
             <?= $this->partial($content) ?>
             <?php } ?>
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
     <!--====================  End of page content  ====================-->
 
