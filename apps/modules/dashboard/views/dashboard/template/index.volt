@@ -45,13 +45,13 @@
 
     <!--==================== page content ====================-->
 
-    <div class="page-section pb-40">
-        <div class="container">
+    <!-- <div class="page-section pb-40">
+        <div class="container"> -->
             {% if content is defined %}
             {{ partial(content) }}
             {% endif %}
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
     <!--====================  End of page content  ====================-->
 
