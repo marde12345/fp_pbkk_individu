@@ -126,6 +126,15 @@ class AdminController extends BaseController
         $this->set_content('buyeradd');
     }
 
+    public function buyerVCAAction()
+    {
+        $buyer = new Users();
+        $res = $buyer->getUserStatus();
+
+        $this->set_content('buyervca');
+        $this->view->data = $res;
+    }
+
     public function addbuyerAction()
     {
         if ($this->request->getPost()) {

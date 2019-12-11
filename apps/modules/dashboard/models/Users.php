@@ -20,4 +20,15 @@ class Users extends User
         ]);
         return $user;
     }
+
+    public function getUserStatus()
+    {
+        $user = Users::find([
+            'conditions' => 'role = ?1 and userstatus = 0',
+            'bind'       => [
+                1 => 'user'
+            ]
+        ]);
+        return $user;
+    }
 }

@@ -133,6 +133,12 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'controller' => 'admin',
         'action' => 'buyerdel'
     ));
+    $router->add('/admin/buyervca', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'buyervca'
+    ));
     $router->addPost('/admin/buyeradd', array(
         'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
         'module' => 'dashboard',
