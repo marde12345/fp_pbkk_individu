@@ -6,7 +6,9 @@ use Phalcon\Init\Dashboard\Models\Sellers;
 use Phalcon\Init\Dashboard\Models\Users;
 use Phalcon\Mvc\View;
 use App\Forms;
+use App\Forms\Kategori;
 use App\Forms\RegisterSellerAdminForm;
+use Phalcon\Init\Dashboard\Models\Kategori as PhalconKategori;
 
 class AdminController extends BaseController
 {
@@ -194,6 +196,61 @@ class AdminController extends BaseController
             }
             $this->set_pnotify('error', 'Coba hubungi admin');
             return $this->response->redirect('admin/buyershow');
+        }
+    }
+
+    public function kataddAction()
+    {
+        $form = new Kategori();
+        $this->set_content('katadd');
+        $this->view->form = $form;
+    }
+
+    public function katShowAction()
+    {
+        $kat = new PhalconKategori();
+        $res = PhalconKategori::find();
+
+        $this->set_content('katshow');
+        $this->view->data = $res;
+    }
+
+    public function addKatAction()
+    {
+        if ($this->request->getPost()) {
+            // Save action
+            $kategori = new PhalconKategori;
+            $form = new Kategori;
+            $form->bind($_POST, $kategori);
+
+            if (!$form->isValid($_POST, $kategori)) {
+                $messages = $form->getMessages();
+
+                foreach ($messages as $message) {
+                    $this->flashSession->error($message);
+                }
+            } elseif ($this->request->isPost()) {
+                foreach ($this->request->getUploadedFiles() as $picture) {
+                    if (!$picture->getError()) {
+                        $filename = date("dmYHis") . $picture->getName();
+                        $picture->moveTo($this->config->application['imageDir'] . 'icon_category/' . $filename);
+                        $kategori->icon = $filename;
+
+                        if ($kategori->save() === false) {
+                            $messages = $kategori->getMessages();
+
+                            foreach ($messages as $message) {
+                                $this->flashSession->error($message);
+                            }
+                        } else {
+                            $this->set_pnotify('success', 'Berhasil menambahkan ' . $kategori->NAME . ' kedalam aplikasi');
+                            return $this->response->redirect('/admin/katshow');
+                        }
+                    }
+                }
+            }
+            $this->set_pnotify('error', 'Ada yang aneh, coba hubungi admin');
+            return $this->response->redirect('/admin/katshow');
         }
     }
 

@@ -27,6 +27,7 @@
     <body onload="new PNotify({title: 'Peringatan!!!',text: '{{notif}}',type: 'notice',styling: 'bootstrap3'});"></body>
     {% endfor %}
     {% for notif in flashSession.getMessages('error') %}
+    {{notif}}
 
     <body onload="new PNotify({title: 'Waduh...',text: '{{notif}}',type: 'error',styling: 'bootstrap3'});"></body>
     {% endfor %}
@@ -62,6 +63,11 @@
     </div>
 
     {{ assets.outputJs('adminJs') }}
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
 </body>
 
 </html>

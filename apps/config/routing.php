@@ -84,7 +84,12 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'controller' => 'login',
         'action' => 'register'
     ));
-
+    $router->add('/admin', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'index'
+    ));
     $router->add('/admin/sellershow', array(
         'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
         'module' => 'dashboard',
@@ -133,12 +138,6 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'controller' => 'admin',
         'action' => 'buyerdel'
     ));
-    $router->add('/admin/buyervca', array(
-        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
-        'module' => 'dashboard',
-        'controller' => 'admin',
-        'action' => 'buyervca'
-    ));
     $router->addPost('/admin/buyeradd', array(
         'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
         'module' => 'dashboard',
@@ -150,6 +149,30 @@ $di['router'] = function () use ($defaultModule, $modules, $di, $config) {
         'module' => 'dashboard',
         'controller' => 'admin',
         'action' => 'delbuyer'
+    ));
+    $router->add('/admin/katadd', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'katadd'
+    ));
+    $router->add('/admin/katshow', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'katshow'
+    ));
+    $router->addPost('/admin/addkat', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'addkat'
+    ));
+    $router->add('/admin/buyervca', array(
+        'namespace' => 'Phalcon\Init\Dashboard\Controllers\Web',
+        'module' => 'dashboard',
+        'controller' => 'admin',
+        'action' => 'buyervca'
     ));
 
 

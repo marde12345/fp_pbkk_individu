@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url()}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('admin')}}">
         <div class="sidebar-brand-icon">
             {{ image("src":"/img/icon.png","style":"widht: 50px; height: 50px;") }}
         </div>
@@ -73,6 +73,10 @@
                     <i class="fas fa-fw fa-trash"></i>
                     <span>Hapus Pembeli</span>
                 </a>
+                <a class="collapse-item" href="{{url('admin/buyervca')}}">
+                    <i class="fas fa-fw fa-envelope"></i>
+                    <span>Verifikasi Code Pembeli</span>
+                </a>
             </div>
         </div>
     </li>
@@ -80,19 +84,65 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKategori"
+            aria-expanded="true" aria-controls="collapseKategori">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Kategori</span>
+        </a>
+        <div id="collapseKategori" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Manajemen Kategori</h6>
+                <a class="collapse-item" href="{{url('admin/katadd')}}">
+                    <i class="fas fa-fw fa-tag"></i>
+                    <span>Tambah Kategori</span>
+                </a>
+                <a class="collapse-item" href="{{url('admin/katshow')}}">
+                    <i class="fas fa-fw fa-tags"></i>
+                    <span>Lihat Kategori</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Blog
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog" aria-expanded="true"
+            aria-controls="collapseBlog">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Blogs</span>
+        </a>
+        <div id="collapseBlog" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Manajemen Blog</h6>
+                <a class="collapse-item" href="{{url('admin/blogadd')}}">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Tambah Blog</span>
+                </a>
+                <a class="collapse-item" href="{{url('admin/blogshow')}}">
+                    <i class="fas fa-fw fa-sticky-note"></i>
+                    <span>Lihat Blog</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
     <!-- Heading -->
     <div class="sidebar-heading">
         Produk
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-plus"></i>
-            <span>Kategori</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

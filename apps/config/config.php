@@ -21,6 +21,7 @@ return new Config(
         'application' => [
             'libraryDir' => APP_PATH . "/lib/",
             'cacheDir' => APP_PATH . "/cache/",
+            'imageDir' => BASE_PATH . "/public/img/",
         ],
 
         'version' => '0.1',
