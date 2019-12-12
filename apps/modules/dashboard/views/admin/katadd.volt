@@ -11,7 +11,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label>Gambar Icon</label>
-                    <input type="file" name="icon">
+                    {{form.render('icon')}}
                 </div>
             </div>
 

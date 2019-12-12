@@ -6,8 +6,10 @@ use Phalcon\Init\Dashboard\Models\Sellers;
 use Phalcon\Init\Dashboard\Models\Users;
 use Phalcon\Mvc\View;
 use App\Forms;
+use App\Forms\Blog;
 use App\Forms\Kategori;
 use App\Forms\RegisterSellerAdminForm;
+use Phalcon\Init\Dashboard\Models\Blog as PhalconBlog;
 use Phalcon\Init\Dashboard\Models\Kategori as PhalconKategori;
 
 class AdminController extends BaseController
@@ -68,7 +70,7 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->NAME . ' kedalam aplikasi');
+                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->getName() . ' kedalam aplikasi');
                 return $this->response->redirect('/admin/sellershow');
             }
             $this->set_pnotify('error', 'Ada yang aneh, coba hubungi admin');
@@ -95,7 +97,7 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->NAME);
+                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->getName);
                 return $this->response->redirect('/admin/sellershow');
             }
             $this->set_pnotify('error', 'Coba hubungi admin');
@@ -164,7 +166,7 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->NAME . ' kedalam aplikasi');
+                $this->set_pnotify('success', 'Berhasil menambahkan ' . $user->getName() . ' kedalam aplikasi');
                 return $this->response->redirect('admin/buyershow');
             }
             $this->set_pnotify('error', 'Coba hubungi admin');
@@ -191,7 +193,7 @@ class AdminController extends BaseController
                     $this->flashSession->error($message);
                 }
             } else {
-                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->NAME);
+                $this->set_pnotify('error', 'Berhasil Menghapus ' . $user->getName);
                 return $this->response->redirect('admin/buyershow');
             }
             $this->set_pnotify('error', 'Coba hubungi admin');
@@ -221,9 +223,9 @@ class AdminController extends BaseController
             // Save action
             $kategori = new PhalconKategori;
             $form = new Kategori;
-            $form->bind($_POST, $kategori);
+            $form->bind(array_merge($_POST, $_FILES), $kategori);
 
-            if (!$form->isValid($_POST, $kategori)) {
+            if (!$form->isValid(array_merge($_POST, $_FILES), $kategori)) {
                 $messages = $form->getMessages();
 
                 foreach ($messages as $message) {
@@ -243,7 +245,7 @@ class AdminController extends BaseController
                                 $this->flashSession->error($message);
                             }
                         } else {
-                            $this->set_pnotify('success', 'Berhasil menambahkan ' . $kategori->NAME . ' kedalam aplikasi');
+                            $this->set_pnotify('success', 'Berhasil menambahkan ' . $kategori->kategori . ' kedalam aplikasi');
                             return $this->response->redirect('/admin/katshow');
                         }
                     }
@@ -251,6 +253,62 @@ class AdminController extends BaseController
             }
             $this->set_pnotify('error', 'Ada yang aneh, coba hubungi admin');
             return $this->response->redirect('/admin/katshow');
+        }
+    }
+
+    public function blogaddAction()
+    {
+        $form = new Blog();
+        $this->set_content('blogadd');
+        $this->view->form = $form;
+    }
+
+    public function blogShowAction()
+    {
+        $kat = new PhalconBlog();
+        $res = PhalconBlog::find();
+
+        $this->set_content('blogshow');
+        $this->view->data = $res;
+    }
+
+    public function addBlogAction()
+    {
+        if ($this->request->getPost()) {
+            // Save action
+            $blog = new PhalconBlog;
+            $form = new Blog;
+            $form->bind(array_merge($_POST, $_FILES), $blog);
+
+            if (!$form->isValid(array_merge($_POST, $_FILES), $blog)) {
+                $messages = $form->getMessages();
+
+                foreach ($messages as $message) {
+                    $this->flashSession->error($message);
+                }
+            } elseif ($this->request->isPost()) {
+                foreach ($this->request->getUploadedFiles() as $picture) {
+                    if (!$picture->getError()) {
+                        $filename = date("dmYHis") . $picture->getName();
+
+                        $picture->moveTo($this->config->application['imageDir'] . 'blogimg/' . $filename);
+                        $blog->blogimg = $filename;
+
+                        if ($blog->save() === false) {
+                            $messages = $blog->getMessages();
+
+                            foreach ($messages as $message) {
+                                $this->flashSession->error($message);
+                            }
+                        } else {
+                            $this->set_pnotify('success', 'Berhasil menambahkan ' . $blog->title . ' kedalam aplikasi');
+                            return $this->response->redirect('/admin/blogshow');
+                        }
+                    }
+                }
+            }
+            $this->set_pnotify('error', 'Ada yang aneh, coba hubungi admin');
+            return $this->response->redirect('/admin/blogshow');
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\TextArea;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Forms\Element\File;
@@ -18,26 +19,32 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 
 
-class Kategori extends Form
+class Blog extends Form
 {
     public function initialize()
     {
-        /**
-         * kategori
-         */
-        $kategori = new Text('kategori', [
+        $title = new Text('title', [
             "class" => "form-control",
             // "required" => true,
-            "placeholder" => "kategori"
+            "placeholder" => "Judul"
         ]);
 
-        // form kategori field validation
-        $kategori->addValidators([
-            new PresenceOf(['message' => 'Kategori harus diisi']),
-            new UniquenessValidator(['message' => 'Kategori sudah terdaftar']),
+        // form judul field validation
+        $title->addValidators([
+            new PresenceOf(['message' => 'Judul harus diisi']),
         ]);
 
-        $file = new File('icon', []);
+        $blogdesc = new TextArea('blogdesc', [
+            "class" => "form-control",
+            // "required" => true,
+            "placeholder" => "Deskripsi"
+        ]);
+
+        $blogdesc->addValidators([
+            new PresenceOf(['message' => 'Judul harus diisi']),
+        ]);
+
+        $file = new File('blogimg', []);
 
         $file->addValidators([new FileValidator([
             "maxSize"              => "1M",
@@ -48,11 +55,12 @@ class Kategori extends Form
                 "image/jpg",
             ],
             "messageType"          => "Allowed file types are :types",
-            "maxResolution"        => "800x600",
+            "maxResolution"        => "1050x690",
             "messageMaxResolution" => "Max resolution of :field is :max",
         ])]);
 
         $this->add($file);
-        $this->add($kategori);
+        $this->add($blogdesc);
+        $this->add($title);
     }
 }

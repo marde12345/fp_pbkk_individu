@@ -27,7 +27,6 @@
     <body onload="new PNotify({title: 'Peringatan!!!',text: '<?= $notif ?>',type: 'notice',styling: 'bootstrap3'});"></body>
     <?php } ?>
     <?php foreach ($this->flashSession->getMessages('error') as $notif) { ?>
-    <?= $notif ?>
 
     <body onload="new PNotify({title: 'Waduh...',text: '<?= $notif ?>',type: 'error',styling: 'bootstrap3'});"></body>
     <?php } ?>
