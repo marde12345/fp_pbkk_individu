@@ -31,6 +31,8 @@ class BaseController extends Controller
         }
         if (!$this->isSessionController()) {
             return $this->response->redirect('dashboard/' . $_SESSION['auth']['role']);
+        } elseif ($this->router->getControllerName() == 'user') {
+            return $this->response->redirect('');
         }
     }
 
